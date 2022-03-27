@@ -1,30 +1,37 @@
 
 .c-feedbackBox {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border: 1px solid rgba($color: #1B1F23, $alpha: .15);
   border-radius: 5px;
-  width: 200px;
-  height: 28px;
-  position: relative;
-  border-collapse: collapse;
+  display: inline-block;
+  overflow: hidden;
+  font-size: 12px;
 }
 
 .feedbackBox__block {
-  height: 100%;
-  display: flex;
-  align-items: center;
+  border-right: 1px solid rgba($color: #1B1F23, $alpha: .15);
+  padding: 5px 12px;
+
+  &:last-child {
+    border-right: none;
+  }
 
   &--btn {
     background-color: #FAFBFC;
+    display: flex;
+    align-items: center;
+
+    .block__icon {
+      margin-right: 5px;
+    }
+  }
+
+  &--btn:hover {
+    cursor: pointer;
   }
 }
 
-
-
 .block__icon svg{
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   color: #586069;
 }

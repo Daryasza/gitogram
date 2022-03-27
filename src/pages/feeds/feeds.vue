@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="feeds-wrapper">
     <div class="header">
       <headLine>
         <template #topline>
@@ -27,12 +27,18 @@
       </headLine>
     </div>
     <div class="feedItem-wrapper">
-      <feedItem v-for="user_feed in usersFeed" :key="user_feed.id">
+      <feedItem v-for="user_feed in usersFeed"
+      :key="user_feed.id"
+      :avatar="user_feed.avatar"
+      :username="user_feed.username"
+      :issues="user_feed.issues"
+      :date="user_feed.date"
+      >
         <template #feed-decs>
           <div class="feed-desc">
-            <a href="#" class="feed-desc__title">Vue.js</a>
-            <div class="feed-desc__text">JavaScript framework for building interactive web applications ⚡</div>
-            <feedbackBox/>
+            <a href="#" class="feed-desc__title">{{ user_feed.title }}</a>
+            <div class="feed-desc__text">{{ user_feed.text }}</div>
+            <feedbackBox :stars="user_feed.stars" :forks="user_feed.forks"/>
           </div>
         </template>
       </feedItem>

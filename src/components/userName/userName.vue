@@ -1,9 +1,9 @@
 <template>
   <button class="c-userName">
     <span class="avatar">
-      <img src="https://picsum.photos/600" alt="user avatar" class="avatar-img">
+      <img :src="avatar" alt="user avatar" class="avatar-img">
     </span>
-    <span class="username">user_name</span>
+    <span class="username">{{ username }}</span>
 
   </button>
 </template>

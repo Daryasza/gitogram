@@ -2,11 +2,73 @@
   {
     "id": "0",
     "avatar": "https://picsum.photos/600",
-    "username": "joshua_l"
+    "username": "joshua_l",
+    "title": "Vue.js",
+    "text": "JavaScript framework for building interactive web applications ⚡",
+    "issues": [
+      {
+        "name": "joshua_l",
+        "comment": "Enable performance measuring in production, at the user's request"
+      },
+      {
+        "name": "Camille",
+        "comment": "It's Impossible to Rename an Inherited Slot"
+      },
+      {
+        "name": "Marselle",
+        "comment": "transition-group with flex parent causes removed items to fly"
+      }
+    ],
+    "date": "15 MAY",
+    "stars": "156k",
+    "forks": "4"
   },
   {
     "id": "1",
     "avatar": "https://picsum.photos/500",
-    "username": "Camille"
+    "username": "Camille",
+    "title": "React.js",
+    "text": "Open source JavaScript library used for designing user interfaces",
+    "issues": [
+      {
+        "name": "None",
+        "comment": "Enable performance measuring in production, at the user's request"
+      },
+      {
+        "name": "Joiu",
+        "comment": "It's Impossible to Rename an Inherited Slot"
+      },
+      {
+        "name": "Marselle",
+        "comment": "transition-group with flex parent causes removed items to fly"
+      }
+    ],
+    "date": "15 MAY",
+    "stars": "158k",
+    "forks": "76"
+  },
+  {
+    "id": "0",
+    "avatar": "https://picsum.photos/800",
+    "username": "Lola",
+    "title": "Vue.js",
+    "text": "JavaScript framework for building interactive web applications ⚡",
+    "issues": [
+      {
+        "name": "joshua_l",
+        "comment": "Enable performance measuring in production, at the user's request"
+      },
+      {
+        "name": "Camille",
+        "comment": "It's Impossible to Rename an Inherited Slot"
+      },
+      {
+        "name": "Marselle",
+        "comment": "transition-group with flex parent causes removed items to fly"
+      }
+    ],
+    "date": "1 APRIL",
+    "stars": "156k",
+    "forks": "4"
   }
 ]

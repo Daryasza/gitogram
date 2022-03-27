@@ -2,24 +2,26 @@
 <template>
   <div class="c-feed">
     <div class="username-wrapper">
-      <userName />
+      <userName
+      :avatar="avatar"
+      :username="username" />
     </div>
     <div class="feed-desc-wrapper">
-      <slot name="feed-decs"/>
+      <slot name="feed-decs" />
     </div>
     <div class="toggler-wrapper">
       <viewToggler @onToggle="toggleFeed"/>
     </div>
     <div class="comments" v-if="visible">
       <ul class="comments__list">
-        <li class="comments__item" v-for="n in 5" :key="n">
-          <userComment text="Some Text" username="User Name"/>
+        <li class="comments__item" v-for="issue in issues" :key="issue.name">
+          <userComment :text="issue.comment" :username="issue.name"/>
         </li>
       </ul>
     </div>
-    <!-- <div class="date">
+    <div class="date">
       <span class="date">{{ date }}</span>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -33,6 +35,24 @@ export default {
     viewToggler,
     userComment,
     userName
+  },
+  props: {
+    avatar: {
+      type: String,
+      required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    issues: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {

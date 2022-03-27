@@ -1,29 +1,23 @@
 <template>
   <table class="c-feedbackBox">
-    <tr>
+    <tr class="feedbackBox">
       <th class="feedbackBox__block feedbackBox__block--btn">
         <span class="block__icon">
           <userIcon name="iconStar"/>
         </span>
-        <span class="block__text">Star</span>
+        <span class="block__text"> Star </span>
       </th>
-      <th>
-        <div class="feedbackBox__block">
-          <span class="block__text">156k</span>
-        </div>
+      <th class="feedbackBox__block">
+        <span class="block__text"> {{ stars }} </span>
       </th>
-      <th>
-        <button class="feedbackBox__block feedbackBox__block--btn">
-          <span class="block__icon">
-            <userIcon name="iconFork"/>
-          </span>
-          <span class="block__text">Fork</span>
-        </button>
+      <th class="feedbackBox__block feedbackBox__block--btn">
+        <span class="block__icon">
+          <userIcon name="iconFork"/>
+        </span>
+        <span class="block__text"> Fork </span>
       </th>
-      <th>
-        <div class="feedbackBox__block">
-          <span class="block__text">4</span>
-        </div>
+      <th class="feedbackBox__block">
+        <span class="block__text"> {{ forks }} </span>
       </th>
     </tr>
   </table>
@@ -35,6 +29,16 @@ import { userIcon } from '../../icons'
 export default {
   components: {
     userIcon
+  },
+  props: {
+    stars: {
+      type: String,
+      required: true
+    },
+    forks: {
+      type: String,
+      required: true
+    }
   }
 }
 </script>
