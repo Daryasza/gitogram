@@ -1,10 +1,12 @@
 <template>
-  <button v-bind:class="['btn', { active: isOpened }]" v-on:click="toggle">
-    <span class="text">{{ isOpened ? 'Hide' : 'View' }} issues</span>
-    <span class="triangle">
-      <userIcon name="iconTriangle" />
-    </span>
-  </button>
+  <div class="btn-wrapper">
+    <button v-bind:class="['btn', { active: isOpened }]" v-on:click="toggle">
+      <span class="text">{{ isOpened ? 'Hide' : 'View' }} issues</span>
+      <span class="triangle">
+        <userIcon name="iconTriangle" />
+      </span>
+    </button>
+  </div>
 </template>
 
 <script>

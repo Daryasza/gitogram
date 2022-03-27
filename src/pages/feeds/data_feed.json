@@ -51,8 +51,8 @@
     "id": "0",
     "avatar": "https://picsum.photos/800",
     "username": "Lola",
-    "title": "Vue.js",
-    "text": "JavaScript framework for building interactive web applications ⚡",
+    "title": "Angular",
+    "text": "TypeScript-based free and open-source web application framework",
     "issues": [
       {
         "name": "joshua_l",
@@ -68,7 +68,7 @@
       }
     ],
     "date": "1 APRIL",
-    "stars": "156k",
-    "forks": "4"
+    "stars": "15k",
+    "forks": "8"
   }
 ]

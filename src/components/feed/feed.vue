@@ -46,7 +46,7 @@ export default {
       required: true
     },
     issues: {
-      type: String,
+      type: Array,
       required: true
     },
     date: {

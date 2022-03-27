@@ -19,6 +19,7 @@
     background-color: #FAFBFC;
     display: flex;
     align-items: center;
+    font-weight: normal;
 
     .block__icon {
       margin-right: 5px;
@@ -31,7 +32,15 @@
 }
 
 .block__icon svg{
-  width: 13px;
-  height: 13px;
   color: #586069;
+}
+
+.block__icon--star svg{
+  width: 15px;
+  height: 15px;
+}
+
+.block__icon--fork svg{
+  width: 12px;
+  height: 14px;
 }
