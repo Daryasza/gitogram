@@ -7,11 +7,13 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --format table",
+    "lint:fix": "eslint --ext .vue ./ --fix"
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "yarn": "^1.22.18"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

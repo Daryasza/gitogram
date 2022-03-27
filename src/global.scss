@@ -1,0 +1,75 @@
+
+body, html {
+  height: 100%;
+}
+
+body {
+  margin: 0 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+button {
+  display: inline-block;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border:none;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  overflow: hidden;
+  min-height: 100%;
+  position: relative;
+}
+
+.x-container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#app {
+  font-family: 'Inter', sans-serif;    
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

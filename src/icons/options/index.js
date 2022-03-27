@@ -1,0 +1,6 @@
+export { default as iconHome } from './home.vue'
+export { default as iconLogout } from './logout.vue'
+export { default as iconPhoto } from './photo.vue'
+export { default as iconTriangle } from './triangle.vue'
+export { default as iconStar } from './starBox.vue'
+export { default as iconFork } from './forkBox.vue'

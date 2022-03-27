@@ -1,6 +1,8 @@
 module.exports = {
   root: true,
   env: {
+    browser: true,
+    es2021: true,
     node: true
   },
   extends: [
@@ -11,6 +13,9 @@ module.exports = {
     parser: '@babel/eslint-parser'
   },
   rules: {
+    'vue/multi-word-component-names': ['error', {
+      ignores: ['feeds', 'Icon', 'home', 'logout', 'photo', 'toggler', 'feed', 'triangle']
+    }],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   },

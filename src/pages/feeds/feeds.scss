@@ -1,0 +1,92 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icons {
+ display: flex;
+ align-items: center;
+}
+
+.icon__wrapper {
+  color: black;
+  display: block;
+  width: 35px;
+  height: 35px;
+  margin-right: 20px;
+  position: relative;
+  border-radius: 50%;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
+}
+
+.icon__wrapper svg{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: inline-block;
+}
+
+.icon__wrapper--home svg {
+  width: 24px;
+  height: 26px;
+
+  &:hover {
+    width: 26px;
+    height: 28px;
+  }
+}
+
+.icon__wrapper--photo svg {
+  width: 37px;
+  height: 37px;
+
+  &:hover {
+    width: 39px;
+    height: 39px;
+  }
+}
+
+.icon__wrapper--logout svg {
+  width: 25px;
+  height: 20px;
+
+  &:hover {
+    width: 27px;
+    height: 22px;
+  }
+}
+
+.users {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feedItem-wrapper {
+  width: 80%;
+}
+
+.feed-desc {
+  padding: 20px;
+  border: 1px solid #E5E5E5;
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px #E5E5E5;
+}
+
+.feed-desc__title {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.feed-desc__text {
+  font-size: 14px;
+  margin-bottom: 40px;
+}
