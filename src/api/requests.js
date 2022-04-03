@@ -7,7 +7,7 @@ export const makeRequest = ({
   method = 'get',
   data = {},
   headers = {
-    Authorization: `token ${process.env.VUE_APP_GH_TOKEN}`
+    // Authorization: `token ${process.env.VUE_APP_GH_TOKEN}`
   }
 }) => axios({
   url,

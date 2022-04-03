@@ -8,7 +8,7 @@
         <span class="block__text"> Star </span>
       </th>
       <th class="feedbackBox__block">
-        <span class="block__text"> {{ stars }} </span>
+        <span class="block__text"> {{ formatCount(stars) }} </span>
       </th>
       <th class="feedbackBox__block feedbackBox__block--btn">
         <span class="block__icon block__icon--fork">
@@ -17,7 +17,7 @@
         <span class="block__text"> Fork </span>
       </th>
       <th class="feedbackBox__block">
-        <span class="block__text"> {{ forks }} </span>
+        <span class="block__text"> {{ formatCount(forks) }} </span>
       </th>
     </tr>
   </table>
@@ -30,6 +30,11 @@ export default {
   name: 'feedbackBox',
   components: {
     userIcon
+  },
+  methods: {
+    formatCount (count) {
+      return count >= 1000 ? Math.round(count / 100) / 10 + 'k' : count
+    }
   },
   props: {
     stars: {
