@@ -8,9 +8,12 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint --format table",
-    "lint:fix": "eslint --ext .vue ./ --fix"
+    "lint:fix": "eslint --ext .vue ./ --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "yarn": "^1.22.18"
@@ -18,6 +21,13 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@storybook/addon-actions": "^6.4.20",
+    "@storybook/addon-docs": "^6.4.20",
+    "@storybook/addon-essentials": "^6.4.20",
+    "@storybook/addon-links": "^6.4.20",
+    "@storybook/builder-webpack5": "^6.4.20",
+    "@storybook/manager-webpack5": "^6.4.20",
+    "@storybook/vue3": "^6.4.20",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-e2e-cypress": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
@@ -27,14 +37,22 @@
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.1",
     "babel-jest": "^27.0.6",
+    "babel-loader": "^8.2.4",
     "cypress": "^8.3.0",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-storybook": "^0.5.7",
     "eslint-plugin-vue": "^8.0.3",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.0.5",
-    "sass": "^1.32.7",
-    "sass-loader": "^12.0.0"
+    "postcss": "^8.4.12",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.49.11",
+    "sass-loader": "^10",
+    "style-loader": "^2",
+    "vue-loader": "^17.0.0",
+    "webpack": "^5.71.0"
   }
 }

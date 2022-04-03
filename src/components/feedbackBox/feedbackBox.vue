@@ -27,16 +27,17 @@
 import { userIcon } from '../../icons'
 
 export default {
+  name: 'feedbackBox',
   components: {
     userIcon
   },
   props: {
     stars: {
-      type: String,
+      type: Number,
       required: true
     },
     forks: {
-      type: String,
+      type: Number,
       required: true
     }
   }

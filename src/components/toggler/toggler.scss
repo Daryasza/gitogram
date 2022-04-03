@@ -9,6 +9,7 @@
   font-size: 14px;
 
   .triangle {
+    display: flex;
     width: 10px;
     transform: rotate(180deg);
   }

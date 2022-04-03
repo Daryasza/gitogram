@@ -11,4 +11,10 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'c-headline'
+}
+</script>
+
 <style lang="scss" src="./headline.scss" scoped></style>

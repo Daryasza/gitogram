@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'userAvatarList',
   props: {
     avatar: {
       type: String,
