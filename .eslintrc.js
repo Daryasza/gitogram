@@ -11,7 +11,7 @@ module.exports = {
   },
   rules: {
     'vue/multi-word-component-names': ['error', {
-      ignores: ['feeds', 'Icon', 'home', 'logout', 'photo', 'toggler', 'feed', 'triangle']
+      ignores: ['stories', 'feeds', 'Icon', 'home', 'logout', 'photo', 'toggler', 'feed', 'triangle']
     }],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'

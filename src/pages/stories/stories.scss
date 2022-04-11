@@ -1,0 +1,56 @@
+.stories-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.stories-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.close-button {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  right: 40px;
+}
+.close-button:before, .close-button:after {
+  position: absolute;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #fff;
+}
+.close-button:before {
+  transform: rotate(45deg);
+}
+.close-button:after {
+  transform: rotate(-45deg);
+}
+
+.logo-button {
+  padding-top: 50px;
+  padding-left: 120px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+}
+
+.stories-body-wrapper {
+  position: relative;
+  height: 660px;
+}
+
+.stories-body {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  margin-left: -188px;
+  transition: .4s;
+}

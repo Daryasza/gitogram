@@ -1,61 +1,95 @@
 <template>
-  <div class="modal-mask">
-    <div class="modal-wrapper">
-      <div class="modal-container">
-        <div class="header">
-          <cProgress />
-          <div class="modal-header">
-            <userName :avatar="avatar" :username="username" />
-          </div>
-        </div>
-        
-        <div class="body--modal">
-          <div class="body">
-            <div class="image">
-              <img :src="avatar" alt="story image">
-            </div>
-            <div class="text">
-              <p>
-                <b>The easiest</b> way to get .NET 6 Preview 4 is to install the maui-check dotnet tool from CLI and follow the instructions.
-              </p>
-              <p>
-                For running on Mac you'll currently use your favorite text editor and terminal to edit and run apps. We expect Visual Studio for Mac .NET 6 support to begin arriving mid-year.
-              </p>
-              <p>In Preview 4 we enable push/pop navigation with NavigationPage. We added a concrete implementation of IWindow, and completed porting ContentPage from Xamarin.Forms</p>
-              <p>For running on Mac you'll currently use your favorite text editor and terminal to edit and run apps. We expect Visual Studio for Mac .NET 6 support to begin arriving mid-year.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <cButton>Follow</cButton>
+  <div class="modal-container" :class="{ 'modal-container-active': active }">
+    <div class="header">
+      <cProgress :active="active" />
+      <cParagraph :count=1 v-if="!avatar && !username" />
+      <div class="modal-header" v-if="avatar && username">
+        <userName :avatar="avatar" :username="username" />
+      </div>
+    </div>
+    <div class="body--modal">
+      <div class="body">
+        <cSpinner v-if="isLoading" />
+        <cParagraph :count=7 v-if="!readme && !isLoading" />
+        <div class="text" v-if="readme" v-html="readme">
         </div>
       </div>
+    </div>
+    <template v-if="active">
+      <button
+        v-if="btnsShown.includes('next')"
+        class="btn btn-next"
+        @click="$emit('onNextSlide')"
+      >
+        <span class="arrow"><userIcon name="iconArrow" /></span>
+      </button>
+      <button
+        v-if="btnsShown.includes('prev')"
+        class="btn btn-prev"
+        @click="$emit('onPrevSlide')"
+      >
+        <span class="arrow"><userIcon name="iconArrow" /></span>
+      </button>
+    </template>
+    <div class="modal-footer">
+      <cButton>Follow</cButton>
     </div>
   </div>
 </template>
 
 <script>
-import { userName } from '../userName/index'
 import { cButton } from '../cButton/index'
+import { cSpinner } from '../cSpinner/index'
+import { userName } from '../userName/index'
 import { cProgress } from '../progress/index'
+import { cParagraph } from '../cParagraph/index'
+import { userIcon } from '../../icons'
 
 export default {
   name: 'cSlider',
+  components: {
+    cButton,
+    cSpinner,
+    userName,
+    cProgress,
+    cParagraph,
+    userIcon
+  },
   props: {
-    avatar: {
-      type: String,
-      required: true
+    idx: {
+      type: Number
     },
-    username: {
-      type: String,
-      required: true
+    active_idx: {
+      type: Number
+    },
+    btnsShown: {
+      type: Array,
+      default: () => ['prev', 'next'],
+      validator (val) {
+        return val.every((item) => item === 'next' || item === 'prev')
+      }
     }
   },
-  components: {
-    userName,
-    cButton,
-    cProgress
+  emits: ['onPrevSlide', 'onNextSlide'],
+  computed: {
+    active () {
+      return Number(this.idx) === Number(this.active_idx)
+    },
+    avatar () {
+      return this.$store.getters['slider/getAvatar'](Number(this.idx))
+    },
+    username () {
+      return this.$store.getters['slider/getUsername'](Number(this.idx))
+    },
+    fullName () {
+      return this.$store.getters['slider/getFullName'](Number(this.idx))
+    },
+    isLoading () {
+      return this.$store.getters['slider/getLoadStatus'](this.fullName)
+    },
+    readme () {
+      return this.$store.getters['slider/getReadme'](this.fullName)
+    }
   }
 }
 </script>

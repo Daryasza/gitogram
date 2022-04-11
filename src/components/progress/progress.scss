@@ -5,9 +5,10 @@
   position: relative;
   overflow: hidden;
 
-  &.active {
+  &.c-progress-active {
     .indicator {
       width: 100%;
+      transition: width 5s;
     }
   }
 }
@@ -19,5 +20,5 @@
   left: 0;
   width: 0;
   background: #31AE54;
-  transition: 5s;
+  transition: width 0s;
 }

@@ -16,6 +16,5 @@ const template = args => ({
 export const Default = template.bind({})
 
 Default.args = {
-  avatar: 'https://picsum.photos/600',
-  username: 'Mark Issa',
+  idx: 0
 }

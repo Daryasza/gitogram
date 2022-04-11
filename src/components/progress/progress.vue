@@ -1,5 +1,5 @@
 <template>
-  <div :class="{active: isActive}" class="c-progress">
+  <div ref="cprogress" :class="{ 'c-progress-active': isActive }" class="c-progress">
     <div ref="indicator" class="indicator"></div>
   </div>
 </template>
@@ -7,26 +7,27 @@
 <script>
 export default {
   name: 'c-progress',
-  data () {
-    return {
-      isActive: false
+  props: {
+    active: {
+      type: Boolean,
+      required: true
     }
   },
-  emits: ['onFinish'],
-  methods: {
-    emitOnFinish() {
-      this.$emit('onFinish')
+  computed: {
+    isActive () {
+      return this.active
     }
   },
   mounted () {
-    window.addEventListener('load', () => {
-      this.isActive = true
-    })
-
-    this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
-  },
-  beforeUnmount() {
-    this.$refs.indicator.removeEventListener('transitionend', this.emitOnFinish)
+    // This is a very dirty hack, but this is the only way
+    setTimeout(() => {
+      if (this.active) {
+        this.$refs.cprogress.classList.toggle('c-progress-active')
+        setTimeout(() => {
+          this.$refs.cprogress.classList.toggle('c-progress-active')
+        }, 30)
+      }
+    }, 30)
   }
 }
 </script>

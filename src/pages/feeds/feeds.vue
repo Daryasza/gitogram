@@ -19,29 +19,35 @@
         </template>
         <template #content>
           <ul class="users">
-            <li class="users__item" v-for="user in users" :key="user.id">
-              <userAvatarList :avatar='user.avatar' :username='user.username' v-on:onAvatarClick="handleAvatarClick(user.id)"/>
+            <li class="users__item" v-for="(repo, idx) in trendingRepos" :key="repo.id">
+              <userAvatarList
+                :avatar='repo.owner.avatar_url'
+                :username='repo.owner.login'
+                v-on:onAvatarClick="$router.push({
+                    name: 'stories',
+                    params: { idx: idx }
+                  })"/>
             </li>
           </ul>
         </template>
       </headLine>
     </div>
-    <div v-if="!isLoaded">
-      Loading...
+    <div v-if="isLoading">
+      <cSpinner />
     </div>
-    <div class="feedItem-wrapper" v-if="isLoaded">
-      <feedItem v-for="item in items"
-      :key="item.id"
-      :avatar="item.owner.avatar_url"
-      :username="item.owner.login"
-      :issues="issues[item.full_name]"
-      :date="item.created_at"
+    <div class="feedItem-wrapper" v-if="!isLoading">
+      <feedItem v-for="repo in trendingRepos"
+      :key="repo.id"
+      :fullName="repo.full_name"
+      :avatar="repo.owner.avatar_url"
+      :username="repo.owner.login"
+      :date="repo.created_at"
       >
         <template #feed-decs>
           <div class="feed-desc">
-            <a href="#" class="feed-desc__title">{{ item.name }}</a>
-            <div class="feed-desc__text">{{ item.description }}</div>
-            <feedbackBox :stars="item.stargazers_count" :forks="item.forks"/>
+            <a href="#" class="feed-desc__title">{{ repo.name }}</a>
+            <div class="feed-desc__text">{{ repo.description }}</div>
+            <feedbackBox :stars="repo.stargazers_count" :forks="repo.forks"/>
           </div>
         </template>
       </feedItem>
@@ -50,56 +56,38 @@
 </template>
 
 <script>
-import { headLine } from '../../components/headline/index'
+import { mapActions, mapGetters } from 'vuex'
 import { userIcon } from '../../icons'
-import { userAvatarList } from '../../components/userAvatarList/index'
-import users from './data.json'
 import { feedItem } from '../../components/feed'
+import { headLine } from '../../components/headline/index'
+import { cSpinner } from '../../components/cSpinner/index'
 import { feedbackBox } from '../../components/feedbackBox'
-import * as api from '../../api/rest'
+import { userAvatarList } from '../../components/userAvatarList/index'
 
 export default {
   name: 'feeds',
   components: {
     headLine,
+    cSpinner,
     userIcon,
     userAvatarList,
     feedItem,
     feedbackBox
   },
-  data () {
-    return {
-      users,
-      items: [],
-      isLoaded: false
-    }
+  computed: {
+    ...mapGetters({
+      trendingRepos: 'feeds/getRepos',
+      isLoading: 'feeds/isLoading'
+    })
   },
   methods: {
-    handleAvatarClick () {
-      console.log('avatar click')
-    }
+    ...mapActions({
+      loadTrendings: 'feeds/loadTrendings'
+    })
   },
-  async created () {
+  created () {
     try {
-      const data = await api.trendings.getTrendings()
-      this.items = data.data.items
-
-      const promisArray = []
-      for (const repo of data.data.items) {
-        promisArray.push(api.repos.getIssues(repo.full_name))
-      }
-
-      Promise.all(promisArray).then((dataArray) => {
-        this.issues = {}
-        for (const data of dataArray) {
-          this.issues[
-            data.request.responseURL
-              .replace('https://api.github.com/repos/', '')
-              .replace(/\/issues.*/, '')
-          ] = data.data.length ? data.data : []
-        }
-        this.isLoaded = true
-      })
+      this.loadTrendings()
     } catch (error) {
       console.log(error)
     }

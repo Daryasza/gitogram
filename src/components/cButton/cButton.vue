@@ -1,10 +1,5 @@
 <template>
-  <button 
-    :class="[
-      'button', 'green-theme', 
-      {'hover-text': withHoverText}
-    ]" 
-  >
+  <button :class="['button', 'green-theme', {'hover-text': withHoverText}]">
     <span class="button__text">
       <slot></slot>
     </span>
