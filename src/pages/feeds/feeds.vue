@@ -32,11 +32,11 @@
         </template>
       </headLine>
     </div>
-    <div v-if="isLoading">
+    <div v-if="isStarredReposLoading">
       <cSpinner />
     </div>
-    <div class="feedItem-wrapper" v-if="!isLoading">
-      <feedItem v-for="repo in trendingRepos"
+    <div class="feedItem-wrapper" v-if="!isStarredReposLoading">
+      <feedItem v-for="repo in starredRepos"
       :key="repo.id"
       :fullName="repo.full_name"
       :avatar="repo.owner.avatar_url"
@@ -47,7 +47,9 @@
           <div class="feed-desc">
             <a href="#" class="feed-desc__title">{{ repo.name }}</a>
             <div class="feed-desc__text">{{ repo.description }}</div>
-            <feedbackBox :stars="repo.stargazers_count" :forks="repo.forks"/>
+            <feedbackBox
+              :stars="repo.stargazers_count"
+              :forks="repo.forks" />
           </div>
         </template>
       </feedItem>
@@ -56,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { userIcon } from '../../icons'
 import { feedItem } from '../../components/feed'
 import { headLine } from '../../components/headline/index'
@@ -75,19 +77,40 @@ export default {
     feedbackBox
   },
   computed: {
+    ...mapState({
+      starredRepos: state => state.user.starredRepos,
+      isStarredReposLoading: state => state.user.starredReposLoadStatus
+    }),
     ...mapGetters({
       trendingRepos: 'feeds/getRepos',
       isLoading: 'feeds/isLoading'
-    })
+    }),
+    isStarred (fullName) {
+      return this.$state.getters['user/getRepoStar'](fullName)
+    }
   },
   methods: {
     ...mapActions({
-      loadTrendings: 'feeds/loadTrendings'
-    })
+      loadTrendings: 'feeds/loadTrendings',
+      loadStarredRepos: 'user/loadStarredRepos'
+    }),
+    async getUser () {
+      try {
+        const res = await fetch('https://api.github.com/user', {
+          headers: {
+            Authorization: `token ${sessionStorage.getItem('token')}`
+          }
+        })
+        await res.json()
+      } catch (err) {
+        console.log(err)
+      }
+    }
   },
   created () {
     try {
       this.loadTrendings()
+      this.loadStarredRepos()
     } catch (error) {
       console.log(error)
     }

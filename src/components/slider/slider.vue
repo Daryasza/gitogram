@@ -10,7 +10,14 @@
     <div class="body--modal">
       <div class="body">
         <cSpinner v-if="isLoading" />
-        <cParagraph :count=7 v-if="!readme && !isLoading" />
+        <cParagraph v-if="!readme && !isLoading"
+          :countObj="[
+            { width: '200px', height: '30px'},
+            { width: '150px', height: '30px'},
+            { width: '100px', height: '30px'},
+            { width: '200px', height: '30px'},
+            { width: '180px', height: '30px'}
+          ]"/>
         <div class="text" v-if="readme" v-html="readme">
         </div>
       </div>
@@ -32,12 +39,17 @@
       </button>
     </template>
     <div class="modal-footer">
-      <cButton>Follow</cButton>
+      <cButton
+        :theme_color="isFollowed ? 'grey-theme' : undefined"
+        @click="followClick()">
+        {{ isFollowed ? "Unfollow" : "Follow" }}
+      </cButton>
     </div>
   </div>
 </template>
 
 <script>
+
 import { cButton } from '../cButton/index'
 import { cSpinner } from '../cSpinner/index'
 import { userName } from '../userName/index'
@@ -61,6 +73,9 @@ export default {
     },
     active_idx: {
       type: Number
+    },
+    full_name: {
+      type: String
     },
     btnsShown: {
       type: Array,
@@ -89,6 +104,17 @@ export default {
     },
     readme () {
       return this.$store.getters['slider/getReadme'](this.fullName)
+    },
+    isFollowed () {
+      return this.$store.getters['user/getRepoStar'](this.full_name)
+    }
+  },
+  methods: {
+    followClick () {
+      this.$store.dispatch(
+        this.isFollowed ? 'user/unstarRepo' : 'user/starRepo',
+        this.fullName
+      )
     }
   }
 }

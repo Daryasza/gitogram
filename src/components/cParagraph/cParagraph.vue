@@ -1,6 +1,6 @@
 <template>
   <div class="paragraph">
-    <div class="paragraph-line" v-for="i in count" :key="i" />
+    <div class="paragraph-line" :style="{ width: item.width, height: item.height }" v-for="(item, i) in countObj" :key="i" />
   </div>
 </template>
 
@@ -8,8 +8,8 @@
 export default {
   name: 'c-paragraph',
   props: {
-    count: {
-      type: Number,
+    countObj: {
+      type: Object,
       required: true
     }
   }

@@ -1,0 +1,58 @@
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user__avatar {
+  margin-right: 20px;
+}
+
+.avatar-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.user__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user__list {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.user__item {
+  margin-right: 10px;
+  font-size: 12px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.user__username {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.info__number {
+  margin-right: 5px;
+  font-weight: 700;
+}
+
+.info__link {
+
+  &:hover {
+    color: #31AE54;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.user__nick {
+  color: #A8A8A8;
+  font-size: 14px;
+}
+

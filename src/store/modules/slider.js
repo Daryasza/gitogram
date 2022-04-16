@@ -44,8 +44,8 @@ export default {
           state.commit('UPDATE_LOAD_STATUS', { fullName: fullName, status: false })
         })
         .catch(err => {
-          console.log(err)
           state.commit('UPDATE_LOAD_STATUS', { fullName: fullName, status: false })
+          console.log(err)
         })
     }
   }

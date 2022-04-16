@@ -28,10 +28,11 @@ export default async function gateway (uri, method, headers = {}, data = {}) {
     data: data,
     headers: headers
   }
+
   // Allowed / implemented methods
-  if (method && ['get', 'post'].includes(method.toLowerCase())) {
-    config[method] = method.toLowerCase()
+  if (method && ['get', 'post', 'put', 'delete'].includes(method.toLowerCase())) {
+    config.method = method.toLowerCase()
   }
-  // headers["Authorization"] = `token ${process.env.VUE_APP_GH_TOKEN}`
+
   return axios(config)
 }

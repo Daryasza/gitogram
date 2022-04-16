@@ -2,19 +2,23 @@
   <table class="c-feedbackBox">
     <tr class="feedbackBox">
       <th class="feedbackBox__block feedbackBox__block--btn">
-        <span class="block__icon block__icon--star">
-          <userIcon name="iconStar"/>
-        </span>
-        <span class="block__text"> Star </span>
+        <button>
+          <span class="block__icon block__icon--star">
+            <userIcon name="iconStar"/>
+          </span>
+          <span class="block__text"> Star </span>
+        </button>
       </th>
       <th class="feedbackBox__block">
         <span class="block__text"> {{ formatCount(stars) }} </span>
       </th>
       <th class="feedbackBox__block feedbackBox__block--btn">
-        <span class="block__icon block__icon--fork">
-          <userIcon name="iconFork"/>
-        </span>
-        <span class="block__text"> Fork </span>
+        <button>
+          <span class="block__icon block__icon--fork">
+            <userIcon name="iconFork"/>
+          </span>
+          <span class="block__text"> Fork </span>
+        </button>
       </th>
       <th class="feedbackBox__block">
         <span class="block__text"> {{ formatCount(forks) }} </span>

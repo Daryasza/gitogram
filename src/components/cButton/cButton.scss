@@ -1,10 +1,23 @@
 .button {
   padding: 11px 100px;
   border-radius: 5px;
+
+  &:hover {
+    .green-theme {
+      background-color: #9E9E9E;
+    }
+    .grey-theme {
+      background-color: #31AE54;
+    }
+  }
 }
 
 .green-theme {
   background: #31AE54;
+}
+
+.grey-theme {
+  background: #9E9E9E;
 }
 
 .hover-text {

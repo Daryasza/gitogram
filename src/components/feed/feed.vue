@@ -1,4 +1,3 @@
-
 <template>
   <div class="c-feed">
     <div class="username-wrapper">
@@ -14,7 +13,11 @@
     </div>
     <div class="comments" v-if="visible">
       <div v-if="isLoading">
-        Loading...
+        <cParagraph :countObj="[
+          { width: '250px', height: '20px'},
+          { width: '150px', height: '20px'},
+          { width: '120px', height: '20px'}
+        ]" />
       </div>
       <div v-if="!isLoading">
         <ul class="comments__list">
@@ -36,13 +39,15 @@ import { mapActions } from 'vuex'
 import { userName } from '../userName/index'
 import { userComment } from '../comment/index'
 import { viewToggler } from '../toggler/index'
+import { cParagraph } from '../cParagraph/index'
 
 export default {
   name: 'feed',
   components: {
     viewToggler,
     userComment,
-    userName
+    userName,
+    cParagraph
   },
   props: {
     fullName: {
@@ -83,7 +88,7 @@ export default {
       loadIssues: 'feed/loadIssues'
     }),
     toggleIssues (isOpened) {
-      this.loadIssues(this.fullName)
+      if (isOpened && !this.issues) this.loadIssues(this.fullName)
       this.visible = isOpened
     }
   }

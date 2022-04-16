@@ -12,6 +12,7 @@
           v-for="(repo, i) in repos"
           :key="i"
           :idx="i"
+          :full_name="repo.full_name"
           :active_idx="this.idx_local"
           :btnsShown="activeBtns"
           @onNextSlide="moveSlider(1)"
