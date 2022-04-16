@@ -26,7 +26,9 @@ export default async function gateway (uri, method, headers = {}, data = {}) {
     url: uri,
     baseURL: baseURL,
     data: data,
-    headers: headers
+    headers: headers,
+    // Cache-Control header is not allowed by GitHub API
+    params: { anticache: Date.now() }
   }
 
   // Allowed / implemented methods
