@@ -20,44 +20,18 @@
 
 <script>
 import { userIcon } from '../../icons'
-import env from '../../../env'
+import auth from '../../composable/auth'
 
 export default {
   name: 'authPage',
   components: {
     userIcon
   },
-  methods: {
-    async getCode () {
-      const githubAuthApi = 'https://github.com/login/oauth/authorize'
-      const params = new URLSearchParams()
+  setup () {
+    const { getCode } = auth()
 
-      params.append('client_id', env.clientId)
-      params.append('scope', 'repo:status read:user public_repo')
-
-      window.location.href = `${githubAuthApi}?${params}`
-    }
-  },
-  async created () {
-    const code = new URLSearchParams(window.location.search).get('code')
-    if (code) {
-      try {
-        const response = await fetch('https://webdev-api.loftschool.com/github', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            clientId: env.clientId, code, clientSecret: env.clientSecret
-          })
-        })
-
-        const { token } = await response.json()
-        sessionStorage.setItem('token', token)
-        this.$router.replace({ name: 'root' })
-      } catch (error) {
-        console.log(error)
-      }
+    return {
+      getCode
     }
   }
 }

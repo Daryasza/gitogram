@@ -12,8 +12,8 @@
           v-for="(repo, i) in repos"
           :key="i"
           :idx="i"
-          :full_name="repo.full_name"
-          :active_idx="this.idx_local"
+          :fullNameProp="repo.full_name"
+          :activeIdx="idxLocalComputed"
           :btnsShown="activeBtns"
           @onNextSlide="moveSlider(1)"
           @onPrevSlide="moveSlider(-1)"
@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 import { cSlider } from '../../components/slider/index'
+import stories from '../../composable/stories'
 
 export default {
   name: 'stories',
@@ -33,40 +33,24 @@ export default {
   components: {
     cSlider
   },
-  data () {
+  setup (props) {
+    const {
+      repos,
+      idxLocal,
+      activeBtns,
+      moveSlider,
+      sliderShift,
+      idxLocalComputed
+    } = stories(props)
+
     return {
-      idx_local: Number(this.idx)
+      repos,
+      idxLocal,
+      activeBtns,
+      moveSlider,
+      sliderShift,
+      idxLocalComputed
     }
-  },
-  computed: {
-    ...mapGetters({
-      repos: 'feeds/getRepos'
-    }),
-    sliderShift () {
-      return `transform: translateX(${this.idx_local ? this.idx_local * -340 : 0}px)`
-    },
-    activeBtns () {
-      if (this.idx_local === 0) return ['next']
-      if (this.idx_local === this.repos.length - 1) return ['prev']
-      return ['next', 'prev']
-    }
-  },
-  methods: {
-    ...mapActions({
-      loadTrendings: 'feeds/loadTrendings',
-      loadReadme: 'slider/loadReadme'
-    }),
-    moveSlider (val = 0) {
-      this.idx_local = Number(this.idx_local) + val
-      const fullName = this.$store.getters['slider/getFullName'](Number(this.idx_local))
-      const readme = this.$store.getters['slider/getReadme'](fullName)
-      if (!readme) this.loadReadme(fullName)
-    }
-  },
-  created () {
-    if (this.idx) this.moveSlider()
-    // Kind of cratch to show stories when root page was not loaded (when repos were not loaded)
-    if (!this.repos.length) this.loadTrendings()
   }
 }
 </script>

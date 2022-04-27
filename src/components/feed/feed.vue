@@ -1,6 +1,6 @@
 <template>
   <div class="c-feed">
-    <div class="username-wrapper">
+    <div class="username-wrapper" v-if="withRepoOwner">
       <userName
       :avatar="avatar"
       :username="username" />
@@ -9,7 +9,7 @@
       <slot name="feed-decs" />
     </div>
     <div class="toggler-wrapper">
-      <viewToggler @onToggle="toggleIssues"/>
+      <viewToggler @toggle="toggleIssues"/>
     </div>
     <div class="comments" v-if="visible">
       <div v-if="isLoading">
@@ -21,7 +21,7 @@
       </div>
       <div v-if="!isLoading">
         <ul class="comments__list">
-          <li class="comments__item" v-for="issue in issues" :key="issue.name">
+          <li class="comments__item" v-for="issue in issues" :key="issue.id">
             <userComment :text="issue.title" :username="issue.user.login"/>
           </li>
         </ul>
@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import { userName } from '../userName/index'
 import { userComment } from '../comment/index'
 import { viewToggler } from '../toggler/index'
 import { cParagraph } from '../cParagraph/index'
+import feed from '../../composable/feed'
 
 export default {
   name: 'feed',
@@ -65,31 +65,27 @@ export default {
     date: {
       type: String,
       required: true
+    },
+    withRepoOwner: {
+      type: Boolean,
+      default: true
     }
   },
-  data () {
+  setup (props) {
+    const {
+      issues,
+      isLoading,
+      formattedDate,
+      toggleIssues,
+      visible
+    } = feed(props)
+
     return {
-      visible: false
-    }
-  },
-  computed: {
-    issues () {
-      return this.$store.getters['feed/getIssues'](this.fullName)
-    },
-    isLoading () {
-      return this.$store.getters['feed/getLoadStatus'](this.fullName)
-    },
-    formattedDate () {
-      return this.$store.getters['feed/getFormattedDate'](this.date)
-    }
-  },
-  methods: {
-    ...mapActions({
-      loadIssues: 'feed/loadIssues'
-    }),
-    toggleIssues (isOpened) {
-      if (isOpened && !this.issues) this.loadIssues(this.fullName)
-      this.visible = isOpened
+      issues,
+      isLoading,
+      formattedDate,
+      toggleIssues,
+      visible
     }
   }
 }

@@ -2,21 +2,6 @@
   <div class="feeds-wrapper">
     <div class="header">
       <headLine>
-        <template #topline>
-          <h1>Gitogram /</h1>
-          <div class="icons">
-            <button class="icon__wrapper icon__wrapper--home">
-              <userIcon name="iconHome" />
-            </button>
-            <button class="icon__wrapper icon__wrapper--photo">
-              <userIcon name="iconPhoto" />
-            </button>
-            <button class="icon__wrapper icon__wrapper--logout ">
-              <userIcon name="iconLogout" />
-            </button>
-
-          </div>
-        </template>
         <template #content>
           <ul class="users">
             <li class="users__item" v-for="(repo, idx) in trendingRepos" :key="repo.id">
@@ -48,8 +33,12 @@
             <a href="#" class="feed-desc__title">{{ repo.name }}</a>
             <div class="feed-desc__text">{{ repo.description }}</div>
             <feedbackBox
-              :stars="repo.stargazers_count"
-              :forks="repo.forks" />
+              :stars="starCount(repo.full_name)"
+              :forks="repo.forks"
+              :starred="isStarred(repo.full_name)"
+              :fullName="repo.full_name"
+              @onStar="onStar(repo.full_name)"
+              @onFork="onFork(repo.full_name)" />
           </div>
         </template>
       </feedItem>
@@ -58,8 +47,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
-import { userIcon } from '../../icons'
+import { mapActions, mapGetters } from 'vuex'
 import { feedItem } from '../../components/feed'
 import { headLine } from '../../components/headline/index'
 import { cSpinner } from '../../components/cSpinner/index'
@@ -71,22 +59,32 @@ export default {
   components: {
     headLine,
     cSpinner,
-    userIcon,
     userAvatarList,
     feedItem,
     feedbackBox
   },
   computed: {
-    ...mapState({
-      starredRepos: state => state.user.starredRepos,
-      isStarredReposLoading: state => state.user.starredReposLoadStatus
-    }),
     ...mapGetters({
       trendingRepos: 'feeds/getRepos',
-      isLoading: 'feeds/isLoading'
+      isLoading: 'feeds/isLoading',
+      starredRepos: 'user/getStarredRepos',
+      isStarredReposLoading: 'user/getStarredReposLoadStatus',
+      avatar: 'user/getAvatar',
+      nickname: 'user/getNickname',
+      isUserDataLoading: 'user/getUserDataLoadStatus'
     }),
-    isStarred (fullName) {
-      return this.$state.getters['user/getRepoStar'](fullName)
+    isStarred () {
+      return fullName => this.$store.getters['user/getRepoStar'](fullName)
+    },
+    starCount () {
+      // eslint-disable-next-line
+      this.starCountTrigger++
+      return fullName => this.$store.getters['user/getRepoStarCount'](fullName)
+    }
+  },
+  data () {
+    return {
+      starCountTrigger: 0
     }
   },
   methods: {
@@ -94,6 +92,19 @@ export default {
       loadTrendings: 'feeds/loadTrendings',
       loadStarredRepos: 'user/loadStarredRepos'
     }),
+    onStar (fullName) {
+      this.$store.dispatch(
+        this.isStarred(fullName) ? 'user/unstarRepo' : 'user/starRepo',
+        fullName
+      )
+      this.starCountTrigger++
+    },
+    onFork (fullName) {
+      window.open(
+        `https://github.com/${fullName}/fork`,
+        '_blank'
+      )
+    },
     async getUser () {
       try {
         const res = await fetch('https://api.github.com/user', {
@@ -119,3 +130,4 @@ export default {
 </script>
 
 <style lang='scss' src='./feeds.scss'></style>
+<style lang='scss' src='../../components/headline/headline.scss'></style>

@@ -17,7 +17,6 @@
 
   &--btn {
     background-color: #FAFBFC;
-    display: flex;
     align-items: center;
     font-weight: normal;
 
@@ -31,10 +30,16 @@
   }
 }
 
+.feedbackBox__btn {
+  display: flex;
+  align-items: center;
+}
+
 .block__icon svg{
   color: #586069;
 }
 
+// TODO: Fix star color to #eab63f
 .block__icon--star svg{
   width: 15px;
   height: 15px;
@@ -43,4 +48,9 @@
 .block__icon--fork svg{
   width: 12px;
   height: 14px;
+}
+
+.disabled__cell {
+  background-color: #ddd;
+  color: #999;
 }

@@ -1,0 +1,53 @@
+@use "sass:math";
+
+.profile-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  // overflow-y: hidden;
+}
+
+.profile-content-currentUser {
+  flex: 0 0 math.div(100%, 3);
+  padding: 10px;
+  border-right: 1px solid #C6C6C8;
+
+  currentUser {
+    justify-content: center;
+  }
+}
+
+.profile-content-feedItem {
+  flex: 0 0 math.div(200%, 3);
+  padding: 10px 40px;
+  height: 84vh;
+  overflow-y: scroll;
+}
+
+.profile-content-feedItem::-webkit-scrollbar {
+  display: none;
+}
+
+.profile-content-feedItem {
+  -ms-overflow-style: none;  /* IE / Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.profile-content-feedItem-title {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  h3 {
+    color: #aaa;
+  }
+}
+
+.profile-currentUser-wrapper {
+  margin: 40px 60px;
+}
+
+.profile-content-feedItem-spinner {
+  display: flex;
+  justify-content: center;
+}

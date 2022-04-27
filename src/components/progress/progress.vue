@@ -5,6 +5,9 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import progress from '../../composable/progress'
+
 export default {
   name: 'c-progress',
   props: {
@@ -13,21 +16,14 @@ export default {
       required: true
     }
   },
-  computed: {
-    isActive () {
-      return this.active
+  setup (props) {
+    const cprogress = ref(null)
+    const { isActive } = progress(props, cprogress)
+
+    return {
+      isActive,
+      cprogress
     }
-  },
-  mounted () {
-    // This is a very dirty hack, but this is the only way
-    setTimeout(() => {
-      if (this.active) {
-        this.$refs.cprogress.classList.toggle('c-progress-active')
-        setTimeout(() => {
-          this.$refs.cprogress.classList.toggle('c-progress-active')
-        }, 30)
-      }
-    }, 30)
   }
 }
 </script>

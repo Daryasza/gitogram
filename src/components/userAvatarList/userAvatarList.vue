@@ -3,7 +3,7 @@
     <div class="avatar">
       <img v-bind:src="avatar" alt="user avatar" class="avatar-img">
     </div>
-    <div class="username">{{ username }}</div>
+    <div class="username">{{ username.length > 12 ? username.substr(0, 9) + '...' : username }}</div>
   </button>
 </template>
 

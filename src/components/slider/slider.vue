@@ -39,9 +39,15 @@
       </button>
     </template>
     <div class="modal-footer">
-      <cButton
+      <cButton class="modal-footer-button"
+        theme_color="grey-theme"
+        v-if="starLoading">
+        <cSpinner size="18px" color="#fff"/>
+      </cButton>
+      <cButton class="modal-footer-button"
         :theme_color="isFollowed ? 'grey-theme' : undefined"
-        @click="followClick()">
+        @click="followClick()"
+        v-if="!starLoading">
         {{ isFollowed ? "Unfollow" : "Follow" }}
       </cButton>
     </div>
@@ -57,6 +63,9 @@ import { cProgress } from '../progress/index'
 import { cParagraph } from '../cParagraph/index'
 import { userIcon } from '../../icons'
 
+import { computed } from 'vue'
+import slider from '../../composable/slider'
+
 export default {
   name: 'cSlider',
   components: {
@@ -67,14 +76,15 @@ export default {
     cParagraph,
     userIcon
   },
+  emits: ['onPrevSlide', 'onNextSlide'],
   props: {
     idx: {
       type: Number
     },
-    active_idx: {
+    activeIdx: {
       type: Number
     },
-    full_name: {
+    fullNameProp: {
       type: String
     },
     btnsShown: {
@@ -85,36 +95,32 @@ export default {
       }
     }
   },
-  emits: ['onPrevSlide', 'onNextSlide'],
-  computed: {
-    active () {
-      return Number(this.idx) === Number(this.active_idx)
-    },
-    avatar () {
-      return this.$store.getters['slider/getAvatar'](Number(this.idx))
-    },
-    username () {
-      return this.$store.getters['slider/getUsername'](Number(this.idx))
-    },
-    fullName () {
-      return this.$store.getters['slider/getFullName'](Number(this.idx))
-    },
-    isLoading () {
-      return this.$store.getters['slider/getLoadStatus'](this.fullName)
-    },
-    readme () {
-      return this.$store.getters['slider/getReadme'](this.fullName)
-    },
-    isFollowed () {
-      return this.$store.getters['user/getRepoStar'](this.full_name)
-    }
-  },
-  methods: {
-    followClick () {
-      this.$store.dispatch(
-        this.isFollowed ? 'user/unstarRepo' : 'user/starRepo',
-        this.fullName
-      )
+  setup (props) {
+    const {
+      avatar,
+      readme,
+      username,
+      fullName,
+      isLoading,
+      isFollowed,
+      followClick,
+      starLoading
+    } = slider(props)
+
+    const active = computed(() => {
+      return Number(props.idx) === Number(props.activeIdx)
+    })
+
+    return {
+      active,
+      avatar,
+      readme,
+      username,
+      fullName,
+      isLoading,
+      isFollowed,
+      followClick,
+      starLoading
     }
   }
 }

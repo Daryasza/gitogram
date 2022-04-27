@@ -7,6 +7,8 @@
 </template>s
 
 <script>
+import cButton from '../../composable/cButton'
+
 export default {
   name: 'cButton',
   props: {
@@ -18,9 +20,11 @@ export default {
       type: String
     }
   },
-  computed: {
-    withHoverText () {
-      return this.hoverText?.length
+  setup (props) {
+    const { withHoverText } = cButton(props.hoverText)
+
+    return {
+      withHoverText
     }
   }
 }

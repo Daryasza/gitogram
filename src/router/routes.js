@@ -1,6 +1,8 @@
+import { auth } from '../pages/auth'
 import { feeds } from '../pages/feeds'
 import { stories } from '../pages/stories'
-import { auth } from '../pages/auth'
+import { profile } from '../pages/profile'
+import { following } from '../pages/following'
 
 export default [
   {
@@ -12,6 +14,18 @@ export default [
     path: '/stories',
     component: stories,
     name: 'stories',
+    props: true
+  },
+  {
+    path: '/profile',
+    component: profile,
+    name: 'profile',
+    props: true
+  },
+  {
+    path: '/following',
+    component: following,
+    name: 'following',
     props: true
   },
   {

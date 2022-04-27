@@ -41,12 +41,15 @@ export default {
       )
         .then(resp => {
           state.commit('ADD_README', { fullName: fullName, readme: resp.data })
-          state.commit('UPDATE_LOAD_STATUS', { fullName: fullName, status: false })
         })
         .catch(err => {
-          state.commit('UPDATE_LOAD_STATUS', { fullName: fullName, status: false })
+          state.commit('ADD_README', {
+            fullName: fullName,
+            readme: '<p style="text-align: center; margin: 80% 0"><i>There is no README.md so far...</i></p>'
+          })
           console.log(err)
         })
+        .finally(() => state.commit('UPDATE_LOAD_STATUS', { fullName: fullName, status: false }))
     }
   }
 }
