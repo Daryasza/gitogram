@@ -7,12 +7,12 @@
       <div class="user__username">{{ username }}</div>
       <ul class="user__list">
         <li class="user__item info info--reposts">
-            <span class="info__number">{{ reposts }} </span>
-            <a :href="repostsLink" target="_blank" class="info__link">reposts</a>
+          <span class="info__number">{{ reposts }} </span>
+          <a :href="repostsLink" target="_blank" class="info__link">reposts</a>
         </li>
         <li class="user__item info info--watchers">
-            <span class="info__number">{{ watchers }} </span>
-            <a :href="watchersLink" target="_blank" class="info__link">watchers</a>
+          <span class="info__number">{{ watchers }} </span>
+          <a :href="watchersLink" target="_blank" class="info__link">watchers</a>
         </li>
       </ul>
       <div class="user__nick">{{ nickname }}</div>

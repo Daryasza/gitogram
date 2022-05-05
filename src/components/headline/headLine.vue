@@ -26,7 +26,9 @@
     <template v-if="withCurrentUser">
       <div v-if="isUserDataLoading">
         <cParagraph :countObj="[
-            { width: '200px', height: '60px'}
+            { width: '300px', height: '20px'},
+            { width: '200px', height: '20px'},
+            { width: '100px', height: '20px'}
           ]" />
       </div>
       <currentUser v-if="!isUserDataLoading"
